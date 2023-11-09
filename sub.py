@@ -1,5 +1,12 @@
 import paho.mqtt.client as mqtt
 
+def on_connect(client, userdata, flags, rc):
+    print("Subscriber connected with result code "+str(rc))
+
+
+def on_message(client, userdata, msg):
+    print(msg.topic+" "+str(msg.payload))
+    
 def client_interface():
     
     client = mqtt.Client()
@@ -7,10 +14,11 @@ def client_interface():
     client.on_message = on_message
 
     client.connect("mqtt.eclipseprojects.io", 1883)
-    return client
-def subscribe():
-    client = client_interface()
     client.subscribe("weather")
+    print("Subscribed to topic 'weather'")
     client.loop_forever()
+    return client
     
-subscribe()
+
+    
+client_interface()
