@@ -58,13 +58,11 @@ def publish():
     publish_weather_info(client, "humidity", api_response["humidity"])
     publish_weather_info(client, "rain_status", api_response["raining"])
     publish_weather_info(client, "wind_speed", api_response["windspeed"])
-    client.loop_forever()
     
 def main():
     while True:
-        publish()
-        
         time.sleep(300)  # Sleep for 5 minutes
+        publish()
     
 if __name__ == "__main__":
     main()
